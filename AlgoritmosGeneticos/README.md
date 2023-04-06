@@ -9,7 +9,10 @@ Esceva um README aqui para guiar o leitor sobre seus experimentos realizados.
 #### Aqui você encontrará uma breve descrição de cada experimento que foi realizado, utilizando funções e métodos nativos do Python para solucionar problemas de otimização.
 
 #### Observações importantes:
+
 - O arquivo funcoes.py contém todas as funções criadas durante o desenvolvimento dos algoritmos.
+- Foram definidos como gene cada elemento dentro de uma lista, indivíduo que é um agrupamento de genes, ou seja, uma lista, e população que é um conjunto de listas.
+- A solução dos problemas têm por base três etapas: seleção, cujos indivíduos são selecionados aleatoriamente para compor uma população, cruzamento entre esses indivíduos que ocorre utilizando estratégias específicas para cada situação, e mutação que é a troca genes a cada dois indivíduos na população e que também ocorre considerando as particularidades de cada experimento.
 
 ### Experimentos:
 
@@ -33,3 +36,7 @@ Ao contrário do experimento anterior, foi realizado com o intuito de testar tod
 **experimento A.05 - descobrindo a senha**
 
 Este é um algoritmo para resolver um problema de minimização que consiste em descobrir a senha determinada pela distância que as senhas estimadas estão em relação à essa senha determinada, elegendo a senha com melhor fit. Ele funciona a partir de uma lista com a senha de caracteres diversos criada, cada caracter é convertido para um número. Em seguida, são geradas senhas aleatórias com a mesma quantidade de caracteres da senha criada. É aplicada a seleção por torneio, onde as senhas combatem entre si e o melhor fit é definido ao comparar as distâncias entre a senha criada e as melhores senhas geradas. Todo o processo tem convergência para a diferença zero, quando a senha é encontrada.
+
+**experimento A.06 - o caixeiro viajante**
+
+Este algoritmo é aplicado ao problema de identificar a menor distância que um caixeiro viajante pode percorrer e retornar para a cidade de partida, dada uma determinada quantidade de cidades. Buscando alcançar esse objetivo, foi definido aleatoriamente cada indivíduo com a condição de que cada um tenha uma sequência de cidades não repetidas. Em seguida, foi gerada uma população com esses indivíduos. Então, foi aplicado o fitness para obter indivíduos com a menor distância percorrida, comparando dentro dessa população. Logo após, foi executado o cruzamento ordenado entre os indivíduos, evitando ter sequências com repetição. Adiante, ocorreu a mutação por troca para produzir os melhores indivíduos gerados no cruzamento, mantendo as sequências com cidades unitárias. Por fim, foi aplicado novamente o fitness para obter o indivíduo que contém cidades cujo ordenamento apresenta a menor distância.
