@@ -284,6 +284,26 @@ def funcao_objetivo_senha(individuo, senha_verdadeira):
     return diferenca
 
 
+def funcao_objetivo_pop_senha(populacao, senha_verdadeira):
+    
+    '''Computa a função objetivo de uma população no problema da senha
+    
+    Args:
+        populacao: lista com todos os indivíduos da população
+        senha_verdadeira: a senha que você está tentando descobrir
+        
+    Returns:
+        Lista contendo os valores da métrica de distância entre as senhas
+    '''
+    
+    resultado = []
+    
+    for individuo in populacao:
+        resultado.append(funcao_objetivo_senha(individuo, senha_verdadeira))
+        
+    return resultado
+
+
 def funcao_objetivo_cv(individuo, cidades):
     
     '''Computa a funcao objetivo de um individuo no problema do caixeiro viajante.
@@ -320,41 +340,71 @@ def funcao_objetivo_cv(individuo, cidades):
     return distancia
 
 
-def funcao_objetivo_pop_senha(populacao, senha_verdadeira):
-    
-    '''Computa a função objetivo de uma população no problema da senha
-    
-    Args:
-        populacao: lista com todos os indivíduos da população
-        senha_verdadeira: a senha que você está tentando descobrir
-        
-    Returns:
-        Lista contendo os valores da métrica de distância entre as senhas
-    '''
-    
-    resultado = []
-    
-    for individuo in populacao:
-        resultado.append(funcao_objetivo_senha(individuo, senha_verdadeira))
-        
-    return resultado
-
 def funcao_objetivo_pop_cv(populacao, cidades):
     
     '''Computa a função objetivo de uma população no problema do caixeiro viajante.
     
     Args:
-        populacao: Lista com todos os indivíduos da população
-        cidades: Dicionário onde as chaves são os nomes das cidades e os valores são as coordenadas
-        das cidades.
+        populacao: uma lista com todos os indivíduos da população
+        cidades: dicionário onde as chaves são os nomes das cidades e os valores são as coordenadas
+        das cidades
         
     Returns:
-        Lista contendo a distância percorrida pelo caixeiro para todos os indivíduos da população.
+        Lista contendo a distância percorrida pelo caixeiro para todos os indivíduos da população
     '''
 
     resultado = []
     for individuo in populacao:
         resultado.append(funcao_objetivo_cv(individuo, cidades))
+
+    return resultado
+
+
+def funcao_objetivo_mochila(individuo, objetos, limite, ordem_dos_nomes):
+    
+    '''Computa a função objetivo de um candidato no problema da mochila.
+    
+    Args:
+        individuo: uma lista binária contendo a informação de quais objetos serão selecionados
+        objetos: dicionário onde as chaves são os nomes dos objetos e os valores são
+        dicionários com a informação do peso e valor
+        limite: número indicando o limite de peso que a mochila aguenta
+        ordem_dos_nomes: uma lista contendo a ordem dos nomes dos objetos
+        
+    Returns:
+        Valor total dos itens inseridos na mochila considerando a penalidade para quando o peso
+        excede o limite
+    '''
+    
+    valor_mochila, peso_mochila = computa_mochila(individuo, objetos, ordem_dos_nomes)
+    
+    if peso_mochila > limite:
+        valor_mochila = 0.01
+        
+    return valor_mochila
+
+def funcao_objetivo_pop_mochila(populacao, objetos, limite, ordem_dos_nomes):
+    
+    '''Computa a função objetivo de uma população no problema da mochila
+    
+    Args:
+        populacao: uma lista com todos os indivíduos da população
+        objetos: dicionário onde as chaves são os nomes dos objetos e os valores são dicionários com
+        a informação do peso e valor
+        limite: número indicando o limite de peso que a mochila aguenta
+        ordem_dos_nomes: uma lista contendo a ordem dos nomes dos objetos
+        
+    Returns:
+        Lista contendo o valor dos itens da mochila de cada indivíduo.
+    '''
+
+    resultado = []
+    for individuo in populacao:
+        resultado.append(
+            funcao_objetivo_mochila(
+                individuo, objetos, limite, ordem_dos_nomes
+            )
+        )
 
     return resultado
 
@@ -579,3 +629,31 @@ def distancia_entre_dois_pontos(a, b):
     dist = ((x1 - x2) ** 2 + (y1 - y2) ** 2) ** (1 / 2)
 
     return dist
+
+def computa_mochila(individuo, objetos, ordem_dos_nomes):
+    
+    ''' Computa o valor total e peso total de uma mochila
+    
+    Args:
+        individuo: uma lista contendo a informação de quais indivíduos serão selecionados
+        objetos: dicionário onde as chaves são os nomes dos objetos e os valores são
+        dicionários com a informação do peso e valor
+        ordem_dos_nomes: lista contendo a ordem dos nomes dos objetos
+        
+    Returns:
+        valor_total: valor total dos itens da mochila em unidades de dinheiros
+        peso_total: peso total dos itens da mochila em unidades de massa
+    '''
+    
+    valor_total = 0
+    peso_total = 0
+    
+    for pegou_o_item_ou_nao, nome_do_item in zip(individuo, ordem_dos_nomes):
+        if pegou_o_item_ou_nao == 1:
+            valor_do_item = objetos[nome_do_item]['valor']
+            peso_do_item = objetos[nome_do_item]['peso']
+            
+            valor_total = valor_total + valor_do_item
+            peso_total = peso_total + peso_do_item
+        
+    return valor_total, peso_total
