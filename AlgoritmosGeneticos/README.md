@@ -4,7 +4,7 @@ Coloque seus experimentos de algoritmos genéticos nesta pasta.
 
 Esceva um README aqui para guiar o leitor sobre seus experimentos realizados.
 
-#### Este repositório apresenta todos os experimentos realizados na disciplina de Redes Neurais e Algoritmos Genéticos do curso de Ciência, Tecnologia e Inovação da Ilum - Escola de Ciência.
+#### Este repositório apresenta todos os experimentos realizados na disciplina de Redes Neurais e Algoritmos Genéticos orientada pelo Prof. Dr. Daniel Roberto Cassar, do curso de bacharelado em Ciência, Tecnologia e Inovação da Ilum - Escola de Ciência.
 
 #### Aqui você encontrará uma breve descrição de cada experimento que foi realizado, utilizando funções e métodos nativos do Python para solucionar problemas de otimização.
 
