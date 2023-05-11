@@ -1,5 +1,9 @@
 import random
 
+
+##### FUNÇÕES DE GENE #####
+
+
 def gene_cb():
     
     '''Gera um gene válido para o problema das caixas binárias.
@@ -41,6 +45,9 @@ def gene_caracter(caracteres):
     
     caracter = random.choice(caracteres)
     return caracter
+
+
+##### FUNÇÕES DE INDIVÍDUO #####
 
 
 def individuo_cb(n):
@@ -101,6 +108,27 @@ def individuo_senha(tamanho_senha, caracteres):
     return candidato
 
 
+def individuo_cv(cidades):
+    
+    '''Sorteia um caminho possível no problema do caixeiro viajante.
+    
+    Args:
+        cidades: Dicionário onde as chaves são os nomes das cidades e os valores são as
+        coordenadas das cidades.
+        
+    Return:
+        Retorna uma lista de nomes de cidades formando um caminho onde visitamos cada cidade
+        apenas uma vez.
+    '''
+
+    nomes = list(cidades.keys())
+    random.shuffle(nomes) # método usado para reorganizar a ordem de elementos na sequência da lista
+    return nomes
+
+
+##### FUNÇÕES DE POPULAÇÃO #####
+
+
 def populacao_cb(tamanho, n):
     
     '''Cria uma população no problema das caixas binárias.
@@ -118,24 +146,6 @@ def populacao_cb(tamanho, n):
     for _ in range(tamanho): # o uso do _ é para uma variável que não será usada no algoritmo
         populacao.append(individuo_cb(n))
     return populacao
-
-
-def individuo_cv(cidades):
-    
-    '''Sorteia um caminho possível no problema do caixeiro viajante.
-    
-    Args:
-        cidades: Dicionário onde as chaves são os nomes das cidades e os valores são as
-        coordenadas das cidades.
-        
-    Return:
-        Retorna uma lista de nomes de cidades formando um caminho onde visitamos cada cidade
-        apenas uma vez.
-    '''
-
-    nomes = list(cidades.keys())
-    random.shuffle(nomes) # método usado para reorganizar a ordem de elementos na sequência da lista
-    return nomes
 
 
 def populacao_cnb(tamanho_populacao, numero_genes, valor_max_caixa):
@@ -194,6 +204,9 @@ def populacao_inicial_cv(tamanho, cidades):
     for _ in range(tamanho):
         populacao.append(individuo_cv(cidades))
     return populacao
+
+
+##### FUNÇÕES OBJETIVO #####
 
 
 def funcao_objetivo_cb(individuo):
@@ -340,7 +353,63 @@ def funcao_objetivo_cv(individuo, cidades):
     return distancia
 
 
+def funcao_objetivo_CV3D(individuo, cidades):
+    
+    '''Computa a funcao objetivo de um individuo no problema do caixeiro viajante.
+    
+    Args:
+        individuo: Lista contendo a ordem das cidades que serão visitadas
+        cidades: Dicionário onde as chaves são os nomes das cidades e os valores são as
+        coordenadas das cidades.
+        
+    Returns:
+        A distância percorrida pelo caixeiro seguindo o caminho contido no indivíduo.
+        Lembrando que após percorrer todas as cidades em ordem, o caixeiro retorna para a cidade
+        original de onde começou sua viagem.
+    '''
+
+    distancia = 0
+    
+    for posicao in range(len(individuo) - 1):
+        
+        partida = cidades[individuo[posicao]]
+        chegada = cidades[individuo[posicao + 1]]
+        
+        percurso = distancia_entre_três_pontos(partida, chegada)
+        distancia = distancia + percurso
+        
+    # Calculando o caminho de volta para a cidade inicial
+    
+    partida = cidades[individuo[-1]]
+    chegada = cidades[individuo[0]]
+    
+    percurso = distancia_entre_três_pontos(partida, chegada)
+    distancia = distancia + percurso
+
+    return distancia
+
+
 def funcao_objetivo_pop_cv(populacao, cidades):
+    
+    '''Computa a função objetivo de uma população no problema do caixeiro viajante.
+    
+    Args:
+        populacao: uma lista com todos os indivíduos da população
+        cidades: dicionário onde as chaves são os nomes das cidades e os valores são as coordenadas
+        das cidades
+        
+    Returns:
+        Lista contendo a distância percorrida pelo caixeiro para todos os indivíduos da população
+    '''
+
+    resultado = []
+    for individuo in populacao:
+        resultado.append(funcao_objetivo_cv(individuo, cidades))
+
+    return resultado
+
+
+def funcao_objetivo_pop_CV3D(populacao, cidades):
     
     '''Computa a função objetivo de uma população no problema do caixeiro viajante.
     
@@ -407,6 +476,9 @@ def funcao_objetivo_pop_mochila(populacao, objetos, limite, ordem_dos_nomes):
         )
 
     return resultado
+
+
+##### FUNÇÕES DE MUTAÇÃO #####
 
 
 def mutacao_cb(individuo):
@@ -480,6 +552,9 @@ def mutacao_de_troca(individuo):
     return individuo
 
 
+##### FUNÇÕES DE SELEÇÃO #####
+
+
 def selecao_roleta_max(populacao, fitness):
     
     '''Seleciona individuos de uma população usando o método da roleta.
@@ -536,6 +611,9 @@ def selecao_torneio_min(populacao, fitness, tamanho_torneio=3):
     return selecionados
 
 
+##### FUNÇÕES DE CRUZAMENTO #####
+
+
 def cruzamento_ponto_simples(pai, mae):
     
     '''Operador de cruzamento de ponto simples.
@@ -588,6 +666,9 @@ def cruzamento_ordenado(pai, mae):
     return filho1, filho2
 
 
+##### FUNÇÕES DE SUPORTE #####
+
+
 def cria_cidades(n):
     
     '''Cria um dicionário aleatório de cidades com suas posições (x,y).
@@ -627,6 +708,30 @@ def distancia_entre_dois_pontos(a, b):
     y2 = b[1]
 
     dist = ((x1 - x2) ** 2 + (y1 - y2) ** 2) ** (1 / 2)
+
+    return dist
+
+
+def distancia_entre_três_pontos(a, b):
+    
+    '''Computa a distância Euclidiana entre três pontos em um espaço R^3
+    
+    Args:
+        a: lista contendo as coordenadas x, y e z de um ponto.
+        b: lista contendo as coordenadas x, y e z de um ponto.
+        
+    Returns:
+        Distância entre as coordenadas dos pontos a e b.
+    '''
+
+    x1 = a[0]
+    x2 = b[0]
+    y1 = a[1]
+    y2 = b[1]
+    z1 = a[2]
+    z2 = b[2]
+
+    dist = ((x1 - x2) ** 2 + (y1 - y2) ** 2 + (z1 - z2) ** 2) ** (1 / 2)
 
     return dist
 

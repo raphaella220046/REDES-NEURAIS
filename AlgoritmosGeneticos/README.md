@@ -44,3 +44,11 @@ Este algoritmo é aplicado ao problema de identificar a menor distância que um 
 **experimento A.07 - aplicando restricoes**
 
 Esse experimento consiste em um problema de maximição com restrição do tipo NP difícil. Para essa situação é dada uma mochila com determinada capacidade máxima para suportar peso, e dentro dessa restrição é preciso selecionar uma quantidade de objetos que cabem na mochila, considerando o maior valor possível na soma dos objetos. Foi criado um dicionário para armazenar os objetos, seu peso e valor. A estratégia utilizada para o algoritmo é aplicar a função de caixas binárias para gerar um indivíduo, ou seja, uma lista binária com a quantidade de objetos que há no dicionário criado. A população é obtida por meio de listas aleatórias de elementos 0 e 1. Esses elementos passam pela etapa de seleção, onde são escolhidos os candidatos com melhor fitness, pelo cruzamento e mutação para otimizar a possibilidade de obter candidatos melhores. Por fim, são computados os valores e pesos totais de cada indivíduo (lista de objetos) e a função objetivo determina o melhor candidato, ponderando entre maximização e restrição.
+
+**experimento GA.03 - caixeiro com gasolina infinita**
+
+Essa é uma variação do experimento A.06 - o caixeiro viajante que consiste em maximizar o problema para identificar a maior distância percorrida.
+
+**experimento GA.04 - caixeiro astronauta**
+
+Essa é outra variação do experimento A.06 - o caixeiro viajante que consiste em maximizar o problema para identificar a maior distância percorrida em um plano de três coordenadas x, y e z.
