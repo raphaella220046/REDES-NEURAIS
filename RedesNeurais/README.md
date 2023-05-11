@@ -27,3 +27,6 @@ Apresenta uma breve introdução a estruturação de classes e métodos denomina
 
 Apresenta a construção automática de grafos, por meio de classes, criando propriedades para armazenar os valores dos dados, operadores que executarão ações sobre esses dados e rótulos para a identificação de cada elemento no grafo.
 
+**O Experimento R.04 - computando gradientes locais**
+
+Apresenta a primeira aplicação do gradiente local em cada vértice da rede neural por backpropagation. Fazendo uma otimização para que a propagação ocorra de maneira automática, sabendo que a rede não é cíclica, ou seja, tem início em vértices raízes e fim em um vértice folha. Desta forma, a propagação é realizada aplicando o algoritmo autograd, tornando conhecido o gradiente local de cada vértice em que se propagar, por meio de uma ordenação topológica.
