@@ -1,12 +1,12 @@
 # Experimentos de redes neurais artificiais
 
-Coloque seus experimentos de redes neurais nesta pasta.
-
-Esceva um README aqui para guiar o leitor sobre seus experimentos realizados.
+![engrenagem.png](/Imagens)
 
 #### Este repositório apresenta todos os experimentos realizados na disciplina de Redes Neurais e Algoritmos Genéticos orientada pelo Prof. Dr. Daniel Roberto Cassar, do curso de bacharelado em Ciência, Tecnologia e Inovação da Ilum - Escola de Ciência.
 
 #### Aqui você encontrará uma breve descrição de cada experimento que foi realizado, utilizando funções e métodos nativos do Python para solucionar problemas de otimização.
+
+As redes neurais artificiais têm um processo análogo ao de engrenagens que fazem um relógio funcionar. Os experimentos desenvolvidos consistem em abrir esse relógio e trabalhar cada engrenagem do sistema.
 
 #### Observações importantes:
 
