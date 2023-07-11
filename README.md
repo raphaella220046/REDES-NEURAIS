@@ -1,9 +1,13 @@
-# <span style="font-family: Garamond;"> <font color=#993399 > __Redes Neurais e Algoritmos Genéticos__ </span>
+# <span style="font-family: Garamond;"> <font color=#993399> __Redes Neurais e Algoritmos Genéticos__ </span>
+<hr>
+    
+## Conteúdo :card_index_dividers:
+
 <hr>
 
 Este repositório apresenta os experimentos realizados durante a disciplina de Redes Neurais e Algoritmos Genéticos orientada pelo Prof. Dr. Daniel Roberto Cassar durante o 3º semestre do curso de Ciência, Tecnologia e Inovação da Ilum Escola de Ciência.
 
-Aqui você encontra os arquivos organizados em duas pastas: `AlgoritmosGeneticos` e `RedesNeurais`.
+Aqui você encontra os arquivos organizados em duas pastas: [`AlgoritmosGeneticos`](https://github.com/raphaella220046/REDES-NEURAIS/tree/main/AlgoritmosGeneticos) e [`RedesNeurais`](https://github.com/raphaella220046/REDES-NEURAIS/tree/main/RedesNeurais).
     
 ## Algoritmos Genéticos :dna:
     
