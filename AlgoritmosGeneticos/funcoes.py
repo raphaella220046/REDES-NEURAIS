@@ -690,6 +690,27 @@ def cria_cidades(n):
     return cidades
 
 
+def cria_cidades_CV3D(n):
+    
+    '''Cria um dicionário aleatório de cidades com suas posições (x,y,z).
+    
+    Args:
+        n: inteiro positivo
+        Número de cidades que serão visitadas pelo caixeiro.
+        
+    Returns:
+        Dicionário contendo o nome das cidades como chaves e a coordenada no plano cartesiano das
+        cidades como valores.
+    '''
+
+    cidades = {}
+
+    for i in range(n):
+        cidades[f"Cidade {i}"] = (random.random(), random.random(), random.random())
+
+    return cidades
+
+
 def distancia_entre_dois_pontos(a, b):
     
     '''Computa a distância Euclidiana entre dois pontos em R^2
